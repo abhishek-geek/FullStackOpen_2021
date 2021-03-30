@@ -1,3 +1,6 @@
+import React from 'react'
+import Part from './Part';
+
 const Content = (props) => {
     return (
       <>
@@ -7,3 +10,5 @@ const Content = (props) => {
       </>
     )
   }
+
+  export default Content
