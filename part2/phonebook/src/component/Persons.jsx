@@ -1,7 +1,15 @@
 import React from "react";
 
-const Person = ({ course }) => {
-  return <h2>{course}</h2>;
+const Persons = ({ showPersons }) => {
+  return (
+    <div>
+      {showPersons.map((person) => (
+        <div key={person.name}>
+          {person.name} {person.number}
+        </div>
+      ))}
+    </div>
+  );
 };
 
-export default Person;
+export default Persons;
