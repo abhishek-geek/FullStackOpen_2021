@@ -67,7 +67,45 @@ const App = () => {
     ],
     cioc: "IND",
   });
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState({
+    request: {
+      type: "City",
+      query: "New Delhi, India",
+      language: "en",
+      unit: "m",
+    },
+    location: {
+      name: "New Delhi",
+      country: "India",
+      region: "Delhi",
+      lat: "28.600",
+      lon: "77.200",
+      timezone_id: "Asia/Kolkata",
+      localtime: "2021-05-10 21:21",
+      localtime_epoch: 1620681660,
+      utc_offset: "5.50",
+    },
+    current: {
+      observation_time: "03:51 PM",
+      temperature: 31,
+      weather_code: 143,
+      weather_icons: [
+        "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0006_mist.png",
+      ],
+      weather_descriptions: ["Haze"],
+      wind_speed: 9,
+      wind_degree: 120,
+      wind_dir: "ESE",
+      pressure: 1004,
+      precip: 0,
+      humidity: 41,
+      cloudcover: 50,
+      feelslike: 29,
+      uv_index: 9,
+      visibility: 4,
+      is_day: "no",
+    },
+  });
 
   useEffect(() => {
     axios.get("https://restcountries.eu/rest/v2/all").then((response) => {

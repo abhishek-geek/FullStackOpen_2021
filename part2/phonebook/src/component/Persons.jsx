@@ -1,13 +1,10 @@
 import React from "react";
 
-const Persons = ({ showPersons }) => {
+const Persons = ({ person, deletePerson }) => {
   return (
-    <div>
-      {showPersons.map((person) => (
-        <div key={person.name}>
-          {person.name} {person.number}
-        </div>
-      ))}
+    <div key={person.id}>
+      {person.name} {person.number}{" "}
+      <button onClick={deletePerson}>delete</button>
     </div>
   );
 };
