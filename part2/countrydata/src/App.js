@@ -157,7 +157,12 @@ const App = () => {
               <li key={l.name}>{l.name}</li>
             ))}
           </ul>
-          <img src={country.flag} alt="flag" height="100" />
+          <img
+            src={country.flag}
+            alt="flag"
+            height="100"
+            style={{ border: "solid" }}
+          />
           <h2>Weather in {country.capital}</h2>
           <div>temperature: {weather.current.temperature} Celcius</div>
           <img src={weather.current.weather_icons} alt="weather icon" />
