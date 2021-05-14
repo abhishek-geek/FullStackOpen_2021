@@ -42,14 +42,22 @@ const App = () => {
     console.log(ok);
     if (!ok) {
       const newPerson = { name: newName, number: newNumber };
-      create(newPerson).then((res) => {
-        setPersons(persons.concat(res));
-        setShowPersons(showPersons.concat(res));
-        setMessage({ type: "popup", body: `Added ${newName}` });
-        setTimeout(() => {
-          setMessage({});
-        }, 3000);
-      });
+      create(newPerson)
+        .then((res) => {
+          setPersons(persons.concat(res));
+          setShowPersons(showPersons.concat(res));
+          setMessage({ type: "popup", body: `Added ${newName}` });
+          setTimeout(() => {
+            setMessage({});
+          }, 3000);
+        })
+        .catch((err) => {
+          const msg = String(err.response.data.error);
+          setMessage({ type: "error", body: msg });
+          setTimeout(() => {
+            setMessage({});
+          }, 3000);
+        });
     } else {
       window.confirm(
         `${newName} is already added to phonebook, replace the old number with new one?`
