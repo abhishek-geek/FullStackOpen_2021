@@ -7,7 +7,7 @@ const logger = require("./utils/logger");
 const config = require("./utils/config");
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
-const middleware = require("./middleware/common");
+const middleware = require("./utils/middlewre");
 
 const mongoUrl = config.MONGODB_URI;
 mongoose
@@ -30,12 +30,19 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
+app.use(middleware.logger);
+
 app.use(middleware.tokenExtractor);
 // app.use(middleware.userExtractor);
 
 app.use("/api/blogs", middleware.userExtractor, blogsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
+
+if (process.env.NODE_ENV === "test") {
+  const testingRouter = require("./controllers/testing");
+  app.use("/api/testing", testingRouter);
+}
 
 const errorHandler = (err, req, res, next) => {
   // logger.error("ERROR OCCURED", err.message);
