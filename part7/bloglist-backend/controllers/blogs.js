@@ -1,5 +1,6 @@
 const blogsRouter = require("express").Router();
 const Blog = require("../model/blog");
+const Comment = require("../model/comment");
 const User = require("../model/user");
 const jwt = require("jsonwebtoken");
 require("express-async-errors");
@@ -34,6 +35,28 @@ blogsRouter.post("/", async (request, response) => {
   });
 
   response.status(201).json(b);
+});
+
+blogsRouter.post("/:id/comments", async (request, response) => {
+  const body = { ...request.body }; // eg {data:"comment"}
+
+  const blog = request.params.id;
+
+  const comment = new Comment({
+    blog,
+    comment: body.comment,
+  });
+
+  const savedComment = await comment.save();
+  response.status(201).json(savedComment);
+});
+
+blogsRouter.get("/:id/comments", async (request, response) => {
+  const blogId = request.params.id;
+
+  const comments = await Comment.find({ blog: blogId });
+  console.log(comments);
+  response.json(comments);
 });
 
 blogsRouter.put("/:id", async (request, response) => {
